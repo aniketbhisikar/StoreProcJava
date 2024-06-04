@@ -10,7 +10,7 @@ public class Account {
     private long id;
 
     @Column
-    private String customer_name;
+    private String customer_id;
 
     @Column
     private String branch_name;

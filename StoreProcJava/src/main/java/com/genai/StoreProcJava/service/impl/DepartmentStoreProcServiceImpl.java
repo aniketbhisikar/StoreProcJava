@@ -1,17 +1,17 @@
-package com.genai.StoreProcJava.service;
+package com.genai.StoreProcJava.service.impl;
 
 import com.genai.StoreProcJava.config.SqlConnector;
 import com.genai.StoreProcJava.entity.institue.Department;
-import jdk.internal.org.objectweb.asm.Type;
+import com.genai.StoreProcJava.service.DepartmentStoreProcService;
+import org.springframework.stereotype.Service;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DepartmentStroProcServiceImpl {
+@Service
+public class DepartmentStoreProcServiceImpl implements DepartmentStoreProcService {
+    @Override
     public void readDepartmentStoreProc() throws Exception {
         SqlConnector sc = new SqlConnector();
         Connection con = sc.sqlInstituteConnection();
@@ -24,6 +24,7 @@ public class DepartmentStroProcServiceImpl {
         con.close();
     }
 
+    @Override
     public void readDepartmentBudgetStoreProc() throws Exception {
         SqlConnector sc = new SqlConnector();
         Connection con = sc.sqlInstituteConnection();
@@ -31,7 +32,7 @@ public class DepartmentStroProcServiceImpl {
         CallableStatement cs = con.prepareCall("{CALL set_budget(?)}");
 
         cs.setInt(1, 2000);
-        cs.registerOutParameter(1, Type.INT);
+        cs.registerOutParameter(1, Types.INTEGER);
 
         ResultSet rs = cs.executeQuery();
         int resultado = cs.getInt("budget");
@@ -40,6 +41,7 @@ public class DepartmentStroProcServiceImpl {
         con.close();
     }
 
+    @Override
     public void readDepartmentTable() throws Exception {
         SqlConnector sc = new SqlConnector();
         String sql_string = "select * from department;";

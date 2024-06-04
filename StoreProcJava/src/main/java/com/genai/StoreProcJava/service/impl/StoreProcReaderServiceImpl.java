@@ -1,6 +1,8 @@
-package com.genai.StoreProcJava.service;
+package com.genai.StoreProcJava.service.impl;
 
 import com.genai.StoreProcJava.config.SqlConnector;
+import com.genai.StoreProcJava.service.StoreProcReaderService;
+import org.springframework.stereotype.Service;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -9,8 +11,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StroreProcReaderService {
+@Service
+public class StoreProcReaderServiceImpl implements StoreProcReaderService {
 
+    @Override
     public void readStoreProcedure() throws Exception {
         SqlConnector sc = new SqlConnector();
         String sql_string = "select * from account;";
