@@ -30,8 +30,8 @@ public class BankTransactionStoreProcServiceImpl implements BankTransactionStore
     @Override
     public String BankAccountTransactionStoreProc(String acct_id, float tran_amt, String tran_type) throws Exception {
         SqlConnector sc = new SqlConnector();
-        //Connection con = sc.sqlBankTransactionConnection(mySqlDriver,mySqlDriverUrl,mySqlUserName,mySqlUserPwd);
-        Connection con = sc.sqlBarclaysConnection();
+        Connection con = sc.sqlBankTransactionConnection(mySqlDriver,mySqlDriverUrl,mySqlUserName,mySqlUserPwd);
+        //Connection con = sc.sqlBarclaysConnection();
         BankAccount account = readBankAccountTable(acct_id);
         Customer cust = readCustomerTable(account.getCustomer_id());
         String tran_memo = cust.getCustomer_name()+" did "+tran_type+" transaction of Rs."+tran_amt;
